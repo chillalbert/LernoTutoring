@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign In — Lerno</title>
+  <link rel="shortcut icon" type="image/png" href="../Lerno Logo.png">
+  <style>
+    :root {
+      --bg: #F9FBE7;
+      --surface: #f0f4d4;
+      --card: #f0f8ff;
+      --accent: #0288D1;
+      --gold: #F9A825;
+      --green: #388E3C;
+      --red: #D32F2F;
+      --text: #263238;
+      --muted: #546E7A;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .logo-row {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .logo-row img { width: 80px; margin-bottom: 10px; }
+    .logo-row h1 { font-size: 26px; font-weight: bold; color: var(--accent); }
+    .logo-row p { color: var(--muted); font-size: 14px; margin-top: 4px; }
+
+    .auth-card {
+      background: var(--card);
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 28px;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .tabs {
+      display: flex;
+      background: var(--surface);
+      border-radius: 5px;
+      padding: 4px;
+      margin-bottom: 24px;
+    }
+    .tab {
+      flex: 1;
+      padding: 10px;
+      text-align: center;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      color: var(--muted);
+      transition: all 0.2s;
+      border: none;
+      background: transparent;
+      font-family: Arial, sans-serif;
+    }
+    .tab.active { background: var(--accent); color: white; }
+
+    .form-group { margin-bottom: 14px; }
+    label { display: block; font-size: 12px; font-weight: bold; color: var(--muted); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
+    input {
+      width: 100%;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border 0.2s;
+    }
+    input:focus { border-color: var(--accent); }
+    input::placeholder { color: #aaa; }
+
+    .submit-btn {
+      width: 100%;
+      background-color: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-family: Arial, sans-serif;
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: opacity 0.15s;
+    }
+    .submit-btn:hover { opacity: 0.88; }
+
+    .error-msg {
+      background: #ffebee;
+      border: 1px solid var(--red);
+      border-radius: 5px;
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: bold;
+      color: var(--red);
+      margin-bottom: 14px;
+      display: none;
+    }
+    .success-msg {
+      background: #e8f5e9;
+      border: 1px solid var(--green);
+      border-radius: 5px;
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: bold;
+      color: var(--green);
+      margin-bottom: 14px;
+      display: none;
+    }
+
+    #logged-in-view { text-align: center; display: none; }
+    #logged-in-view h2 { font-size: 22px; font-weight: bold; color: var(--accent); margin-bottom: 8px; }
+    #logged-in-view p { color: var(--muted); margin-bottom: 20px; font-size: 14px; }
+    .action-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .action-btn {
+      background: white;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .action-btn:hover { background: #e3f2fd; }
+    .action-btn.danger { border-color: var(--red); color: var(--red); }
+    .action-btn.danger:hover { background: #ffebee; }
+
+    .back-link { margin-top: 20px; text-align: center; }
+    .back-link a { color: var(--muted); font-size: 14px; text-decoration: none; }
+    .back-link a:hover { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<div class="logo-row">
+  <img src="../Lerno Logo.png" alt="Lerno">
+  <h1>⚡ Lerno</h1>
+  <p>Learn. Play. Level up.</p>
+</div>
+
+<!-- Auth form -->
+<div class="auth-card" id="auth-card">
+  <div class="tabs">
+    <button class="tab active" id="tab-login" onclick="switchTab('login')">Log In</button>
+    <button class="tab" id="tab-signup" onclick="switchTab('signup')">Sign Up</button>
+  </div>
+
+  <div class="error-msg" id="error-msg"></div>
+  <div class="success-msg" id="success-msg"></div>
+
+  <div class="form-group">
+    <label>Email</label>
+    <input type="email" id="auth-email" placeholder="you@example.com">
+  </div>
+  <div class="form-group">
+    <label>Password</label>
+    <input type="password" id="auth-password" placeholder="••••••••" onkeydown="if(event.key==='Enter')submitAuth()">
+  </div>
+  <div class="form-group" id="name-group" style="display:none;">
+    <label>Display Name</label>
+    <input type="text" id="auth-name" placeholder="How should we call you?">
+  </div>
+
+  <button class="submit-btn" id="submit-btn" onclick="submitAuth()">Log In</button>
+</div>
+
+<!-- Logged in view -->
+<div class="auth-card" id="logged-in-view">
+  <h2>👋 Welcome back!</h2>
+  <p id="logged-in-email"></p>
+  <div class="action-row">
+    <button class="action-btn" onclick="window.location.href='../dashboard.html'">🏆 Dashboard</button>
+    <button class="action-btn" onclick="window.location.href='../MATH LESSONS/6thgrademathlessons.html'">📚 Continue Learning</button>
+    <button class="action-btn danger" onclick="doSignOut()">Sign Out</button>
+  </div>
+</div>
+
+<div class="back-link"><a href="../index.html">← Back to Lerno Home</a></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA9VvhA_H-YTW7iYlv1T6tMyBJvaUehv1U",
+  authDomain: "lernotutoring-83938.firebaseapp.com",
+  projectId: "lernotutoring-83938",
+  storageBucket: "lernotutoring-83938.firebasestorage.app",
+  messagingSenderId: "903186672583",
+  appId: "1:903186672583:web:f045148a5abf04f03907e2"
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+let mode = "login";
+
+window.switchTab = function(tab) {
+  mode = tab;
+  document.getElementById("tab-login").classList.toggle("active", tab === "login");
+  document.getElementById("tab-signup").classList.toggle("active", tab === "signup");
+  document.getElementById("submit-btn").textContent = tab === "login" ? "Log In" : "Create Account";
+  document.getElementById("name-group").style.display = tab === "signup" ? "block" : "none";
+  clearMessages();
+};
+
+window.submitAuth = async function() {
+  const email = document.getElementById("auth-email").value.trim();
+  const password = document.getElementById("auth-password").value;
+  const name = document.getElementById("auth-name").value.trim();
+  clearMessages();
+
+  if (!email || !password) { showError("Please fill in all fields."); return; }
+  if (password.length < 6) { showError("Password must be at least 6 characters."); return; }
+
+  try {
+    if (mode === "login") {
+      await signInWithEmailAndPassword(auth, email, password);
+      // onAuthStateChanged will handle redirect
+    } else {
+      if (!name) { showError("Please enter a display name."); return; }
+      const cred = await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(cred.user, { displayName: name });
+      await setDoc(doc(db, "users", cred.user.uid), {
+        email,
+        displayName: name,
+        xp: 0,
+        streak: 0,
+        lastActive: serverTimestamp(),
+        createdAt: serverTimestamp(),
+        badges: [],
+        unitsCompleted: [],
+        streakFrozen: false,
+      });
+      showSuccess("Account created! Welcome to Lerno 🎉");
+      setTimeout(() => window.location.href = "../dashboard.html", 1500);
+    }
+  } catch (err) {
+    const msgs = {
+      "auth/wrong-password": "Incorrect password.",
+      "auth/user-not-found": "No account found with that email.",
+      "auth/email-already-in-use": "An account with this email already exists.",
+      "auth/invalid-email": "Please enter a valid email address.",
+      "auth/too-many-requests": "Too many attempts. Please try again later.",
+    };
+    showError(msgs[err.code] || err.message);
+  }
+};
+
+window.doSignOut = async function() {
+  await signOut(auth);
+};
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    document.getElementById("auth-card").style.display = "none";
+    document.getElementById("logged-in-view").style.display = "block";
+    document.getElementById("logged-in-email").textContent =
+      `Signed in as ${user.displayName || user.email}`;
+    // Auto-redirect to dashboard if just logged in
+    if (document.referrer.includes("signup") || !document.referrer) {
+      // Don't auto-redirect on the page itself
+    }
+  } else {
+    document.getElementById("auth-card").style.display = "block";
+    document.getElementById("logged-in-view").style.display = "none";
+  }
+});
+
+function showError(msg) {
+  const el = document.getElementById("error-msg");
+  el.textContent = "⚠️ " + msg;
+  el.style.display = "block";
+}
+function showSuccess(msg) {
+  const el = document.getElementById("success-msg");
+  el.textContent = "✅ " + msg;
+  el.style.display = "block";
+}
+function clearMessages() {
+  document.getElementById("error-msg").style.display = "none";
+  document.getElementById("success-msg").style.display = "none";
+}
+</script>
+</body>
+</html>

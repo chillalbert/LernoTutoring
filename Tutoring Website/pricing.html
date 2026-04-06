@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing</title>
+</head>
+<link rel="stylesheet" href="pricing.css">
+<body>
+    <div class="black">
+    <h1 class="header">Pricing</h1>
+    <h3 class="heading">All Subjects:</h3>
+    <p class="text">$20 per hour</p>
+    </div>
+    <script src="/path/to/supabase.js"></script>
+<script>
+  const supabase = createClient('https://YOUR_PROJECT.supabase.co', 'YOUR_ANON_KEY');
+
+  supabase.auth.getSession().then(({ data: { session } }) => {
+    updateUI(session); // your custom UI logic
+  });
+</script>
+
+</body>
+</html>

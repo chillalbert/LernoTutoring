@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lerno</title>
+    <link rel="shortcut icon" type="image/png" href="Lerno Logo.png">
+</head>
+<link rel="stylesheet" href="styles.css">
+<body>
+    <nav style="text-align: center;">
+    <div class="header">
+        <img src="Lerno Logo.png" alt="Lerno Logo" style="width: 200px; height: auto; padding: 20px;">
+        <h1 id="type-text">Welcome to Lerno</h1>
+    </div>
+    <div>
+    <a href="index.html" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color:#1565C0; font-size: 20px; padding: 10px">Home</a>
+    <a href="book.html" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color:#1565C0; font-size: 20px; padding: 10px">Tutoring</a>
+    <a href="Authentication/signup.html" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color:#1565C0; font-size: 20px; padding: 10px">Sign In/Up</a>
+    <a href="./pricing.html" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color:#1565C0; font-size: 20px; padding: 10px">Pricing</a>
+    <a href="livetutorchat.html" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color:#1565C0; font-size: 20px; padding: 10px">Chat With a Tutor</a>
+    <div style="position: relative; display: inline-block;">
+      <a href="#" id="dropdownLink" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color:#1565C0; font-size: 20px; padding: 10px">Open Menu</a>
+      <div id="dropdownMenu" style="
+        display:none;
+        position:absolute;
+        top:100%;
+        left:0;
+        background:#f9f9f9;
+        border:1px solid #ccc;
+        border-radius:6px;
+        box-shadow:0 2px 6px rgba(0,0,0,0.15);
+        padding:15px 20px;
+        width:200px;
+      ">
+        <a href="./MATH LESSONS/1stgrademathlessons.html">1st Grade Lessons</a><br>
+        <a href="./MATH LESSONS/6thgrademathlessons.html">6th Grade Lessons</a><br>
+        <a href="#">Option 3</a>
+      </div>
+    </div>
+    
+    <script>
+      const link = document.getElementById('dropdownLink');
+      const menu = document.getElementById('dropdownMenu');
+    
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+      });
+    
+      document.addEventListener('click', e => {
+        if (!link.contains(e.target) && !menu.contains(e.target)) {
+          menu.style.display = 'none';
+        }
+      });
+    </script>
+
+    </nav>
+    </div>
+    <div style="text-align: center;">
+    <a href="elapreview.html"><img src="ELA Button.png" style="width: 150px; height: 80px; padding-top: 3%; text-align: left;"></a>
+    <a href="mathpreview.html"><img src="Math Button.png" style="width: 150px; height: 80px; padding-top: 3%; margin: 0, auto; text-align: right;"></a>
+    <a href="sciencepreview.html"><img src="Science Button.png" style="width: 150px; height: 80px; padding-top: 3%; text-align: left;"></a>
+    </div>
+    <div class="intro">
+        <p>
+            At Lerno, we make learning exciting for kids of all ages! From math and reading to science, history, and everything in between — our expert tutors help students build confidence, improve grades, and develop real understanding.
+            Whether your child needs extra support or wants to get ahead, we offer fun, interactive lessons tailored to their unique needs. With flexible online sessions and a focus on building strong study habits, Lerno is the all-in-one learning hub that grows with your child.
+        </p>
+    </div>
+
+    <div class="features">
+    <h2>Here's How It Works</h2>
+    <ol>
+        <li>Create a free account in less than a minute.</li>
+        <li>Your child gets a quick placement quiz to find the perfect starting point.</li>
+        <li>We match your child with expert tutors in math, reading, writing, and more.</li>
+        <li>Watch your child grow in confidence and skills — fast.</li>
+      </ol>
+    </div>
+
+    <div class="cta">
+    <h2>Get Started</h2>
+    <p id="cta-text"></p>
+    <button onclick="window.location.href='book.html'" style="width:180px;height:50px;background-color: #0288D1;">Sign Up For Tutoring Today</button>
+    </div>
+    <script>
+        const messages = ["Welcome to Lerno."];
+        let i = 0;
+        let j = 0;
+        let currentMessage = "";
+        let isDeleting = false;
+      
+        function typeWelcome() {
+          if (i < messages.length) {
+            if (!isDeleting && j <= messages[i].length) {
+              currentMessage = messages[i].substring(0, j++);
+            } else if (isDeleting && j >= 0) {
+              currentMessage = messages[i].substring(0, j--);
+            }
+      
+            document.getElementById("type-text").textContent = currentMessage;
+      
+            if (!isDeleting && j === messages[i].length) {
+              isDeleting = true;
+              setTimeout(typeWelcome, 2000);
+              return;
+            } else if (isDeleting && j === 0) {
+              isDeleting = false;
+              i = (i + 1) % messages.length;
+            }
+      
+            setTimeout(typeWelcome, isDeleting ? 50 : 100);
+          }
+        }
+      
+        const messagest = [
+          "Sign up today to start your learning journey!",
+          "Join Lerno today and unlock your child’s potential!",
+          "Experience the joy of learning with Lerno!",
+          "Transform your child’s education with Lerno!",
+          "Discover the magic of learning with Lerno!",
+          "Empower your child with Lerno’s expert tutors!",
+          "Unlock your child’s potential with Lerno!",
+          "Join the Lerno family and watch your child thrive!",
+          "Experience personalized learning with Lerno!",
+          "Empower your child with expert tutoring — join today."
+        ];
+      
+        let it = 0;
+        let jt = 0;
+        let currentMessaget = "";
+        let isDeletingt = false;
+      
+        function typeCTA() {
+          if (it < messagest.length) {
+            if (!isDeletingt && jt <= messagest[it].length) {
+              currentMessaget = messagest[it].substring(0, jt++);
+            } else if (isDeletingt && jt >= 0) {
+              currentMessaget = messagest[it].substring(0, jt--);
+            }
+      
+            document.getElementById("cta-text").textContent = currentMessaget;
+      
+            if (!isDeletingt && jt === messagest[it].length) {
+              isDeletingt = true;
+              setTimeout(typeCTA, 2000);
+              return;
+            } else if (isDeletingt && jt === 0) {
+              isDeletingt = false;
+              it = (it + 1) % messagest.length;
+            }
+      
+            setTimeout(typeCTA, isDeletingt ? 50 : 100);
+          }
+        }
+      
+        document.addEventListener("DOMContentLoaded", () => {
+          typeWelcome();
+          typeCTA();
+        });
+      </script>
+      <script src="/path/to/supabase.js"></script>
+      <script>
+        const supabase = createClient('https://YOUR_PROJECT.supabase.co', 'YOUR_ANON_KEY');
+      
+        supabase.auth.getSession().then(({ data: { session } }) => {
+          updateUI(session); // your custom UI logic
+        });
+      </script>
+      
+      
+      
+</body>
+</html>

@@ -1,0 +1,76 @@
+.big {
+    color: #0288D1;
+    text-align: center;
+}
+#signup-email {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 2px solid #4FC3F7;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color:#FFFDE7;
+}
+#login-email {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 2px solid #4FC3F7;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color:#FFFDE7;
+}
+#login-password {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 2px solid #4FC3F7;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color:#FFFDE7;
+}
+#signup-password {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 2px solid #4FC3F7;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color:#FFFDE7;
+}
+body {
+    background-color: #F9FBE7;
+}
+#signup-button {
+    background-color: #0288D1;
+    color: white;
+    padding: 10px 100px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+}
+#login-button {
+    background-color: #0288D1;
+    color: white;
+    padding: 10px 100px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+}
+#logout-button {
+    background-color: #0288D1;
+    color: white;
+    padding: 10px 100px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+}
