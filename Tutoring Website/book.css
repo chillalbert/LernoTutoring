@@ -1,0 +1,18 @@
+body {
+    background-color: #F9FBE7;
+}
+#big {
+    text-align: center;
+    color: #0288D1
+}
+.create {
+    margin: 0 auto;
+    display: block;
+}
+#signedin {
+    display: none; /* Hidden by default */
+    font-size: 18px;
+    color: white; /* Ensure text is visible */
+    text-align: center;
+    margin-top: 20px;
+  }
